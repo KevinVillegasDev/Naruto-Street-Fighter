@@ -2,7 +2,7 @@
 
 ## Project Description
 
-This game is a spinoff from the classic street fighter games. You'll  be able to choose from a list of different anime characters  and battlegrounds and fight to the death
+This game is a spinoff from the classic street fighter games. You'll  be able to choose from a list of different anime characters  and battlegrounds and fight to the death!
 
 ## Wireframes
 - [Game](https://imgur.com/a/YjNLfpG)
