@@ -10,6 +10,10 @@ SCREEN_HEIGHT = 600
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Naruto Street Fighter")
 
+# set framerate
+clock = pygame.time.Clock()
+FPS = 60
+
 background_img = pygame.image.load(
     "assets/images/hiddensandbg.png").convert_alpha()
 
@@ -28,7 +32,10 @@ fighter_2 = Fighter(700, 310)
 # game loop to continuously run game and allow characters to be drawn
 run = True
 while run:
+    clock.tick(FPS)
     show_bg()
+    fighter_1.move()
+    fighter_2.move()
     fighter_1.show(screen)
     fighter_2.show(screen)
     for event in pygame.event.get():
