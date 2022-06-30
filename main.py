@@ -1,4 +1,3 @@
-from turtle import back
 import pygame
 from fighter import Fighter
 
