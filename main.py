@@ -33,7 +33,7 @@ run = True
 while run:
     clock.tick(FPS)
     show_bg()
-    fighter_1.move(SCREEN_WIDTH, SCREEN_HEIGHT)
+    fighter_1.move(SCREEN_WIDTH, SCREEN_HEIGHT, screen, fighter_2)
     # fighter_2.move()
     fighter_1.show(screen)
     fighter_2.show(screen)

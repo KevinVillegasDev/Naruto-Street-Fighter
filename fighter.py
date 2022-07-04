@@ -1,4 +1,3 @@
-from turtle import screensize
 import pygame
 
 
@@ -6,8 +5,11 @@ class Fighter():
     def __init__(self, x, y):
         self.rect = pygame.Rect((x, y, 80, 180))
         self.vel_y = 0
+        self.jump = False
+        self.attacking = False
+        self.attack_type = 0
 
-    def move(self, screen_width, screen_height):
+    def move(self, screen_width, screen_height, surface, target):
         speed = 10
         gravity = 2
         # dx and dy are the change in x and y coordinates
@@ -17,15 +19,27 @@ class Fighter():
         # get keypresses
         key = pygame.key.get_pressed()
 
-        # movement
-        if key[pygame.K_a]:
-            dx = -speed
-        if key[pygame.K_d]:
-            dx = speed
+        # can only perform other action if not currently attacking
+        if self.attacking == False:
+            # movement
+            if key[pygame.K_a]:
+                dx = -speed
+            if key[pygame.K_d]:
+                dx = speed
 
         # jump
-        if key[pygame.K_w]:
-            self.vel_y = -30
+            if key[pygame.K_w] and self.jump == False:
+                self.vel_y = -30
+            self.jump = True
+
+        # attack
+            if key[pygame.K_r] or key[pygame.K_t]:
+                self.attack(surface, target)
+            # determine which attack type is used
+            if key[pygame.K_r]:
+                self.attack_type = 1
+            if key[pygame.K_t]:
+                self.attack_type = 2
 
         # apply gravity to bring fighter down
         self.vel_y += gravity
@@ -40,10 +54,19 @@ class Fighter():
 
         if self.rect.bottom + dy > screen_height - 59:
             self.vel_y = 0
+            self.jump = False
             dy = screen_height - 59 - self.rect.bottom
         # update player position
         self.rect.x += dx
         self.rect.y += dy
+
+    def attack(self, surface, target):
+        self.attacking = True
+        attacking_rect = pygame.Rect(
+            self.rect.centerx, self.rect.y, 2 * self.rect.width, self.rect.height)
+        if attacking_rect.colliderect(target.rect):
+            print("hit")
+        pygame.draw.rect(surface, (0, 255, 0), attacking_rect)
 
     def show(self, surface):
         pygame.draw.rect(surface, (255, 0, 0), self.rect)
