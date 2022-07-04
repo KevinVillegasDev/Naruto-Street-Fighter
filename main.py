@@ -14,7 +14,7 @@ clock = pygame.time.Clock()
 FPS = 60
 
 background_img = pygame.image.load(
-    "assets/images/hiddensandbg.png").convert_alpha()
+    "assets/images/finalvalley-1.png").convert_alpha()
 
 
 def show_bg():
@@ -33,8 +33,8 @@ run = True
 while run:
     clock.tick(FPS)
     show_bg()
-    fighter_1.move()
-    fighter_2.move()
+    fighter_1.move(SCREEN_WIDTH, SCREEN_HEIGHT)
+    # fighter_2.move()
     fighter_1.show(screen)
     fighter_2.show(screen)
     for event in pygame.event.get():
