@@ -54,8 +54,8 @@ naruto_size = 52
 sasuke_size = 52
 naruto_scale = 4
 sasuke_scale = 4
-naruto_offset_position = [-5, -5]
-sasuke_offset_position = [-5, -5]
+naruto_offset_position = [15, -5]
+sasuke_offset_position = [7, 1]
 naruto_data = [naruto_size, naruto_scale, naruto_offset_position]
 sasuke_data = [sasuke_size, sasuke_scale, sasuke_offset_position]
 
@@ -121,10 +121,12 @@ def main_menu():
     # controls = font.render(
     #     "Game controls are WASD for movement, and abilities are R and T", 1, (0, 0, 0))
     # screen.blit(controls, (200, 200))
-    renderTextCenteredAt("Welcome to Naruto Street Fighter!",
-                         font, (255, 255, 255), SCREEN_WIDTH / 2, 50, screen, 800)
+    renderTextCenteredAt("WELCOME TO NARUTO STREET FIGHTER!",
+                         font, (255, 255, 255), SCREEN_WIDTH / 2, 45, screen, 1000)
     renderTextCenteredAt("Game controls are WASD for movement, and abilities are R and T",
-                         font, (255, 255, 255), SCREEN_WIDTH / 2, 150, screen, 800)
+                         font, (255, 255, 255), SCREEN_WIDTH / 2, 130, screen, 800)
+    renderTextCenteredAt("Press P to start game!",
+                         font, (255, 255, 255), SCREEN_WIDTH / 2, 260, screen, 800)
 
 
 # game loop to continuously run game and allow characters to be drawn
