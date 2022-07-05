@@ -51,9 +51,13 @@ WHITE = (255, 255, 255)
 
 # define fighter variables
 naruto_size = 52
+sasuke_size = 52
 naruto_scale = 4
+sasuke_scale = 4
 naruto_offset_position = [-5, -5]
+sasuke_offset_position = [-5, -5]
 naruto_data = [naruto_size, naruto_scale, naruto_offset_position]
+sasuke_data = [sasuke_size, sasuke_scale, sasuke_offset_position]
 
 
 background_img = pygame.image.load(
@@ -65,9 +69,12 @@ mainmenu_img = pygame.transform.scale(pygame.image.load(
 naruto_sprites = pygame.image.load(
     "assets/naruto/sprites/naruto sprites.png").convert_alpha()
 
+sasuke_sprites = pygame.image.load(
+    "assets/naruto/sprites/sasuke.png").convert_alpha()
+
 # find number of steps in each animation
 naruto_steps = [13, 13, 12, 10, 6, 11, 8, 9, 6]
-naruto2_steps = [13, 13, 12, 10, 6, 11, 8, 9, 6]
+sasuke_steps = [6, 6, 6, 1, 11, 5, 4, 10, 6, 6, 6, 13, 12, 11]
 
 
 def show_bg():
@@ -87,7 +94,7 @@ def health_bar(health, x, y):
 
 # create fighter instances
 fighter_1 = Fighter(200, 310, naruto_data, naruto_sprites, naruto_steps)
-fighter_2 = Fighter(700, 310, naruto_data, naruto_sprites, naruto2_steps)
+fighter_2 = Fighter(700, 310, sasuke_data, sasuke_sprites, sasuke_steps)
 
 # run game function
 
@@ -100,7 +107,7 @@ def run_game():
         health_bar(fighter_1.health, 20, 20)
         health_bar(fighter_2.health, 580, 20)
         fighter_1.move(SCREEN_WIDTH, SCREEN_HEIGHT, screen, fighter_2)
-        # fighter_2.move()
+        fighter_2.move(SCREEN_WIDTH, SCREEN_HEIGHT, screen, fighter_1)
         fighter_1.show(screen)
         fighter_2.show(screen)
         for event in pygame.event.get():
@@ -117,7 +124,7 @@ def main_menu():
     renderTextCenteredAt("Welcome to Naruto Street Fighter!",
                          font, (255, 255, 255), SCREEN_WIDTH / 2, 50, screen, 800)
     renderTextCenteredAt("Game controls are WASD for movement, and abilities are R and T",
-                         font, (255, 255, 255), SCREEN_WIDTH / 2, 200, screen, 800)
+                         font, (255, 255, 255), SCREEN_WIDTH / 2, 150, screen, 800)
 
 
 # game loop to continuously run game and allow characters to be drawn
