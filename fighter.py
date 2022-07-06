@@ -18,7 +18,9 @@ class Fighter():
         self.jump = False
         self.attacking = False
         self.attack_type = 0
+        self.attack_cd = 0
         self.health = 100
+        self.idle = True
 
     def load_images(self, sprite_sheet, animation_steps):
         # extract from sprite sheet
@@ -105,8 +107,10 @@ class Fighter():
             elif self.attack_type == 2:
                 self.update_action(4)  # attack 2
         elif self.jump == True:
+            # print(self.jump)
             self.update_action(2)  # jump
         elif self.running == True:
+            print(self.running)
             self.update_action(1)  # run
         else:
             self.update_action(0)
@@ -117,15 +121,16 @@ class Fighter():
         # checking if enough time has passed since last animation update
 
         if pygame.time.get_ticks() - self.update_time > animation_cooldown:
-
             self.frame_index += 1
             self.update_time = pygame.time.get_ticks()
         # check if animation has finished
         if self.frame_index >= len(self.animation_list[self.action]):
             self.frame_index = 0
+            print(self.frame_index)
             # check if attack was executed
             if self.action == 3 or self.action == 4:
                 self.attacking = False
+                self.attack_cd = 40
 
     def attack(self, surface, target):
         self.attacking = True
@@ -135,16 +140,16 @@ class Fighter():
             target.health -= 10
         pygame.draw.rect(surface, (0, 255, 0), attacking_rect)
 
+    def update_action(self, new_action):
+        # check if new action is different than previous one
+        if new_action != self.action:
+            self.action = new_action
+            # reset frame index
+            self.frame_index = 0
+            self.update_time = pygame.time.get_ticks()
+
     def show(self, surface):
         img = pygame.transform.flip(self.image, self.flip, False)
         pygame.draw.rect(surface, (255, 0, 0), self.rect)
         surface.blit(img, (self.rect.x -
                      (self.offset[0] * self.image_scale), self.rect.y - (self.offset[1] * self.image_scale)))
-
-    def update_action(self, new_action):
-        # check if new action is different than previous one
-        if new_action != self.action:
-            self.action = new_action
-        # reset frame index
-        self.frame_index = 0
-        self.update_time = pygame.time.get_ticks()
