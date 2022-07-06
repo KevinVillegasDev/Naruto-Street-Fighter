@@ -1,5 +1,7 @@
 import pygame
+import random
 from fighter import Fighter
+
 pygame.font.init()
 
 pygame.init()
@@ -59,9 +61,17 @@ sasuke_offset_position = [70, 40]
 naruto_data = [naruto_size, naruto_scale, naruto_offset_position]
 sasuke_data = [sasuke_size, sasuke_scale, sasuke_offset_position]
 
+background_dict = {
+    1: "hiddensandbg",
+    2: "finalvalley-1",
+    3: "forestbg",
+    4: "konoha",
+    5: "academy"
+}
 
 background_img = pygame.image.load(
-    "assets/images/finalvalley-1.png").convert_alpha()
+    f"assets/images/{background_dict[random.randint(1,5)]}.png").convert_alpha()
+
 
 mainmenu_img = pygame.transform.scale(pygame.image.load(
     "assets/images/mainmenu.png"), (SCREEN_WIDTH, SCREEN_HEIGHT))
