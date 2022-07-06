@@ -32,6 +32,7 @@ class Fighter():
                 temp_img_list.append(pygame.transform.scale(
                     temp_img, (self.size * self.image_scale, self.size * self.image_scale)))
             animation_list.append(temp_img_list)
+
         return animation_list
 
     def move(self, screen_width, screen_height, surface, target):
@@ -111,14 +112,20 @@ class Fighter():
             self.update_action(0)
 
         animation_cooldown = 50
+        # update image
         self.image = self.animation_list[self.action][self.frame_index]
         # checking if enough time has passed since last animation update
+
         if pygame.time.get_ticks() - self.update_time > animation_cooldown:
+
             self.frame_index += 1
             self.update_time = pygame.time.get_ticks()
         # check if animation has finished
         if self.frame_index >= len(self.animation_list[self.action]):
             self.frame_index = 0
+            # check if attack was executed
+            if self.action == 3 or self.action == 4:
+                self.attacking = False
 
     def attack(self, surface, target):
         self.attacking = True

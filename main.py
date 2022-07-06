@@ -107,7 +107,7 @@ def run_game():
         health_bar(fighter_1.health, 20, 20)
         health_bar(fighter_2.health, 580, 20)
         fighter_1.move(SCREEN_WIDTH, SCREEN_HEIGHT, screen, fighter_2)
-        fighter_2.move(SCREEN_WIDTH, SCREEN_HEIGHT, screen, fighter_1)
+        # fighter_2.move(SCREEN_WIDTH, SCREEN_HEIGHT, screen, fighter_1)
         fighter_1.update()
         fighter_2.update()
         fighter_1.show(screen)
