@@ -185,7 +185,6 @@ class Fighter():
             if attacking_rect.colliderect(target.rect):
                 target.health -= 10
                 target.hit = True
-            pygame.draw.rect(surface, (0, 255, 0), attacking_rect)
 
     def update_action(self, new_action):
         # check if new action is different than previous one
@@ -197,6 +196,5 @@ class Fighter():
 
     def show(self, surface):
         img = pygame.transform.flip(self.image, self.flip, False)
-        pygame.draw.rect(surface, (255, 0, 0), self.rect)
         surface.blit(img, (self.rect.x -
                      (self.offset[0] * self.image_scale), self.rect.y - (self.offset[1] * self.image_scale)))
