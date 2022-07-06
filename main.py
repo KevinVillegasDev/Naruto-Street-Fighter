@@ -137,10 +137,12 @@ def main_menu():
     # screen.blit(controls, (200, 200))
     renderTextCenteredAt("WELCOME TO NARUTO STREET FIGHTER!",
                          font, (255, 255, 255), SCREEN_WIDTH / 2, 45, screen, 1000)
-    renderTextCenteredAt("Game controls are WASD for movement, and abilities are R and T",
+    renderTextCenteredAt("P1 controls are WASD for movement, and abilities are R and T",
                          font, (255, 255, 255), SCREEN_WIDTH / 2, 130, screen, 800)
+    renderTextCenteredAt("P2 controls are Arrow Keys for movement, and abilities are 1 and 2",
+                         font, (255, 255, 255), SCREEN_WIDTH / 2, 240, screen, 800)
     renderTextCenteredAt("Press P to start game!",
-                         font, (255, 255, 255), SCREEN_WIDTH / 2, 260, screen, 800)
+                         font, (255, 255, 255), SCREEN_WIDTH / 2, 500, screen, 800)
 
 
 # game loop to continuously run game and allow characters to be drawn

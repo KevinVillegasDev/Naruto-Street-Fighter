@@ -71,7 +71,7 @@ class Fighter():
 
             # attack
                 if key[pygame.K_r] or key[pygame.K_t]:
-                    self.attack(surface, target)
+                    self.attack(target)
                 # determine which attack type is used
                 if key[pygame.K_r]:
                     self.attack_type = 1
@@ -94,7 +94,7 @@ class Fighter():
 
             # attack
                 if key[pygame.K_KP1] or key[pygame.K_KP2]:
-                    self.attack(surface, target)
+                    self.attack(target)
                 # determine which attack type is used
                 if key[pygame.K_KP1]:
                     self.attack_type = 1
@@ -177,7 +177,7 @@ class Fighter():
                     self.attacking = False
                     self.attack_cd = 20
 
-    def attack(self, surface, target):
+    def attack(self, target):
         if self.attack_cd == 0:
             self.attacking = True
             attacking_rect = pygame.Rect(
