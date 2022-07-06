@@ -50,12 +50,12 @@ RED = (255, 0, 0)
 WHITE = (255, 255, 255)
 
 # define fighter variables
-naruto_size = 52
-sasuke_size = 52
+naruto_size = 162
+sasuke_size = 162
 naruto_scale = 4
 sasuke_scale = 4
-naruto_offset_position = [15, -5]
-sasuke_offset_position = [7, 1]
+naruto_offset_position = [72, 40]
+sasuke_offset_position = [70, 40]
 naruto_data = [naruto_size, naruto_scale, naruto_offset_position]
 sasuke_data = [sasuke_size, sasuke_scale, sasuke_offset_position]
 
@@ -67,14 +67,14 @@ mainmenu_img = pygame.transform.scale(pygame.image.load(
     "assets/images/mainmenu.png"), (SCREEN_WIDTH, SCREEN_HEIGHT))
 
 naruto_sprites = pygame.image.load(
-    "assets/naruto/sprites/naruto sprites.png").convert_alpha()
+    "assets/naruto/sprites/warrior.png").convert_alpha()
 
 sasuke_sprites = pygame.image.load(
-    "assets/naruto/sprites/sasuke.png").convert_alpha()
+    "assets/naruto/sprites/warrior.png").convert_alpha()
 
 # find number of steps in each animation
-naruto_steps = [13, 13, 12, 10, 6, 11, 8, 9, 6]
-sasuke_steps = [6, 6, 6, 1, 11, 5, 4, 10, 6, 6, 6, 13, 12, 11]
+naruto_steps = [10, 8, 1, 7, 7, 3, 7]
+sasuke_steps = [10, 8, 1, 7, 7, 3, 7]
 
 
 def show_bg():
@@ -93,8 +93,8 @@ def health_bar(health, x, y):
 
 
 # create fighter instances
-fighter_1 = Fighter(200, 310, naruto_data, naruto_sprites, naruto_steps)
-fighter_2 = Fighter(700, 310, sasuke_data, sasuke_sprites, sasuke_steps)
+fighter_1 = Fighter(200, 310, False, naruto_data, naruto_sprites, naruto_steps)
+fighter_2 = Fighter(700, 310, True, sasuke_data, sasuke_sprites, sasuke_steps)
 
 # run game function
 
@@ -108,6 +108,8 @@ def run_game():
         health_bar(fighter_2.health, 580, 20)
         fighter_1.move(SCREEN_WIDTH, SCREEN_HEIGHT, screen, fighter_2)
         fighter_2.move(SCREEN_WIDTH, SCREEN_HEIGHT, screen, fighter_1)
+        fighter_1.update()
+        fighter_2.update()
         fighter_1.show(screen)
         fighter_2.show(screen)
         for event in pygame.event.get():
