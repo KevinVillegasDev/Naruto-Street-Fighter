@@ -103,8 +103,10 @@ def health_bar(health, x, y):
 
 
 # create fighter instances
-fighter_1 = Fighter(200, 310, False, naruto_data, naruto_sprites, naruto_steps)
-fighter_2 = Fighter(700, 310, True, sasuke_data, sasuke_sprites, sasuke_steps)
+fighter_1 = Fighter(1, 200, 310, False, naruto_data,
+                    naruto_sprites, naruto_steps)
+fighter_2 = Fighter(2, 700, 310, True, sasuke_data,
+                    sasuke_sprites, sasuke_steps)
 
 # run game function
 
@@ -117,7 +119,7 @@ def run_game():
         health_bar(fighter_1.health, 20, 20)
         health_bar(fighter_2.health, 580, 20)
         fighter_1.move(SCREEN_WIDTH, SCREEN_HEIGHT, screen, fighter_2)
-        # fighter_2.move(SCREEN_WIDTH, SCREEN_HEIGHT, screen, fighter_1)
+        fighter_2.move(SCREEN_WIDTH, SCREEN_HEIGHT, screen, fighter_1)
         fighter_1.update()
         fighter_2.update()
         fighter_1.show(screen)
