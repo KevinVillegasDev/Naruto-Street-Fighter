@@ -19,7 +19,9 @@ class Fighter():
         self.attacking = False
         self.attack_type = 0
         self.attack_cd = 0
+        self.hit = False
         self.health = 100
+        self.alive = True
         self.idle = True
 
     def load_images(self, sprite_sheet, animation_steps):
@@ -95,13 +97,22 @@ class Fighter():
         else:
             self.flip = True
 
+        if self.attack_cd > 0:
+            self.attack_cd -= 1
+
         # update player position
         self.rect.x += dx
         self.rect.y += dy
 
     # handle animations
     def update(self):
-        if self.attacking == True:
+        if self.health <= 0:
+            self.health = 0
+            self.alive = False
+            self.update_action(6)
+        elif self.hit == True:
+            self.update_action(5)  # hit
+        elif self.attacking == True:
             if self.attack_type == 1:
                 self.update_action(3)  # attack 1
             elif self.attack_type == 2:
@@ -125,20 +136,31 @@ class Fighter():
             self.update_time = pygame.time.get_ticks()
         # check if animation has finished
         if self.frame_index >= len(self.animation_list[self.action]):
-            self.frame_index = 0
-            print(self.frame_index)
-            # check if attack was executed
-            if self.action == 3 or self.action == 4:
-                self.attacking = False
-                self.attack_cd = 40
+            # check if player is dead
+            if self.alive == False:
+                self.frame_index = len(self.animation_list[self.action]) - 1
+            else:
+                self.frame_index = 0
+                print(self.frame_index)
+                # check if attack was executed
+                if self.action == 3 or self.action == 4:
+                    self.attacking = False
+                    self.attack_cd = 20
+                if self.action == 5:
+                    self.hit = False
+                    # if player is in middle of attack, attack is stopped
+                    self.attacking = False
+                    self.attack_cd = 20
 
     def attack(self, surface, target):
-        self.attacking = True
-        attacking_rect = pygame.Rect(
-            self.rect.centerx - (2 * self.rect.width * self.flip), self.rect.y, 2 * self.rect.width, self.rect.height)
-        if attacking_rect.colliderect(target.rect):
-            target.health -= 10
-        pygame.draw.rect(surface, (0, 255, 0), attacking_rect)
+        if self.attack_cd == 0:
+            self.attacking = True
+            attacking_rect = pygame.Rect(
+                self.rect.centerx - (2 * self.rect.width * self.flip), self.rect.y, 2 * self.rect.width, self.rect.height)
+            if attacking_rect.colliderect(target.rect):
+                target.health -= 10
+                target.hit = True
+            pygame.draw.rect(surface, (0, 255, 0), attacking_rect)
 
     def update_action(self, new_action):
         # check if new action is different than previous one
